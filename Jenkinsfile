@@ -23,7 +23,7 @@ pipeline {
     }
     post{
          always {
-                 echo 'Always'
+                 junit 'build/reports/**/*.xml'
                  }
          success{
                  echo SUCCESS_MSG;
