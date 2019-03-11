@@ -19,7 +19,7 @@ pipeline {
                         failure{
                              echo 'This will run only if failed'
                         }
-                        instable{
+                        unstable{
                              echo 'This will run only if the run was marked as unstable'
                         }
                         changed{
