@@ -23,7 +23,7 @@ pipeline {
     }
     post{
          always {
-                 junit '**/reports/junit/*.xml'
+                 junit 'tests/results/*.xml'
                  }
          success{
                  echo SUCCESS_MSG;
