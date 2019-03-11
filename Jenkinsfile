@@ -18,12 +18,13 @@ pipeline {
         stage('Test') {
                     steps {
                         sh 'mvn clean test'
+                        sh 'mvn surefire-report:report'
                     }
                 }
     }
     post{
          always {
-                   junit "*/*.xml"
+                   junit "target/surefire-reports/*.xml"
                  }
          success{
                  echo SUCCESS_MSG;
