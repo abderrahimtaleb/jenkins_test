@@ -3,8 +3,10 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sh 'mvn --version'
-                sh 'mvn install clean'
+            timeout(time : 1, unit : 'MINUTES'){
+                      sh 'mvn --version'
+                      sh 'mvn install clean'
+            }
             }
         }
     }
