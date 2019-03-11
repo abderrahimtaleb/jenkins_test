@@ -30,7 +30,7 @@ pipeline {
                  echo SUCCESS_MSG;
                  }
          failure{
-             echo mail to: "abderra.taleb@gmail.com",
+               mail to: 'abderra.taleb@gmail.com',
                         subject: "Test Failure : ${currentBuild.fullDisplayName}",
                         body: "Test URL : ${env.BUILD_URL}"
                 }
