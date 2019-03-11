@@ -9,7 +9,7 @@ pipeline {
                 timeout(time : 1, unit : 'MINUTES'){
                     retry(5){
                           sh 'mvn --version'
-                          sh 'mvn install clean'
+                          sh 'mvn install clean -DskipTests'
                       }
                     }
 
