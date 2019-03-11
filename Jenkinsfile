@@ -30,7 +30,9 @@ pipeline {
                  echo SUCCESS_MSG;
                  }
          failure{
-                 echo 'This will run only if failed'
+             echo mail to: "abderra.taleb@gmail.com",
+                        subject: "Test Failure : ${currentBuild.fullDisplayName}",
+                        body: "Test URL : ${env.BUILD_URL}"
                 }
          unstable{
                  echo 'This will run only if the run was marked as unstable'
