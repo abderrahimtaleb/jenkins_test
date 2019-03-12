@@ -19,7 +19,7 @@ public class DevOpsProjectApplicationTests {
 
 	@Test
 	public void contextLoads() {
-		assertEquals(mainCtrl.main(), "The app is running ");
+		assertEquals(mainCtrl.main(), "The app is running");
 	}
 
 }

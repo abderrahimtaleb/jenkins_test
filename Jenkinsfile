@@ -1,7 +1,7 @@
 pipeline {
     agent { docker { image 'maven:3.3.3' } }
     environment {
-        SUCCESS_MSG = 'This will run only if successful'
+        SUCCESS_MSG = 'This will run only if successful env'
     }
     stages {
         stage('build') {
@@ -18,25 +18,38 @@ pipeline {
         stage('Test') {
                     steps {
                         sh 'mvn clean test'
+                        sh 'mvn surefire-report:report'
                     }
                 }
+       stage('Check before deploy') {
+                    steps {
+                        input 'Can i deploy to prod ?'
+                    }
+              }
+        stage('deploy') {
+                    steps {
+                        echo 'Deploy to prod !'
+                    }
+              }
     }
-                post{
-                            always {
-                                echo 'Always'
-                            }
-                            success{
-                                 echo '';
-                            }
-                            failure{
-                                 echo 'This will run only if failed'
-                            }
-                            unstable{
-                                 echo 'This will run only if the run was marked as unstable'
-                            }
-                            changed{
-                                 echo 'This will run only if the state of the Pipeline has changed'
-                                 echo 'For example, if the Pipeline was previously failing but is now successful'
-                            }
-                        }
+    post{
+         always {
+                   junit "target/surefire-reports/*.xml"
+                 }
+         success{
+                 echo SUCCESS_MSG
+                 }
+         failure{
+                mail to: 'sc.abderrahim.taleb@gmail.com',
+                     subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
+                     body: "Something is wrong with ${env.BUILD_URL}"
+                }
+         unstable{
+                 echo 'This will run only if the run was marked as unstable'
+                 }
+         changed{
+                 echo 'This will run only if the state of the Pipeline has changed'
+                 echo 'For example, if the Pipeline was previously failing but is now successful'
+                 }
+          }
 }
