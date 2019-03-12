@@ -4,6 +4,10 @@ pipeline {
         SUCCESS_MSG = 'This will run only if successful env'
         //DOCKER_HOST = 'tcp://34.219.140.176:4243'
     }
+    stage('Initialize'){
+        def dockerHome = tool 'myDocker'
+        env.PATH = "${dockerHome}/bin:${env.PATH}"
+    }
     stages {
         stage('build') {
             steps {
