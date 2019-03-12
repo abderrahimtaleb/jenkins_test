@@ -7,10 +7,6 @@ pipeline {
         //DOCKER_HOST = 'tcp://34.219.140.176:4243'
     }
     stages {
-            stage('Initialize'){
-        def dockerHome = tool 'myDocker'
-        env.PATH = "${dockerHome}/bin:${env.PATH}"
-    }
         stage('build') {
             steps {
                 timeout(time : 1, unit : 'MINUTES'){
