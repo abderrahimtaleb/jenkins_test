@@ -27,12 +27,12 @@ pipeline {
                    junit "target/surefire-reports/*.xml"
                  }
          success{
-                 echo SUCCESS_MSG;
+                 mail to: 'abderra.taleb@gmail.com',
+                     subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
+                     body: "Something is wrong with ${env.BUILD_URL}"
                  }
          failure{
-               mail to: 'abderra.taleb@gmail.com',
-                        subject: "Test Failure : ${currentBuild.fullDisplayName}",
-                        body: "Test URL : ${env.BUILD_URL}"
+                 echo 'Failure !'
                 }
          unstable{
                  echo 'This will run only if the run was marked as unstable'
