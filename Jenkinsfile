@@ -21,6 +21,16 @@ pipeline {
                         sh 'mvn surefire-report:report'
                     }
                 }
+       stage('Check before deploy') {
+                    steps {
+                        input 'Can i deploy to prod ?'
+                    }
+              }
+        stage('deploy') {
+                    steps {
+                        echo 'Deploy to prod !'
+                    }
+              }
     }
     post{
          always {
