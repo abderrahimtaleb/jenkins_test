@@ -21,14 +21,19 @@ pipeline {
                         sh 'mvn surefire-report:report'
                     }
                 }
-       stage('Check before deploy') {
+        stage('package'){
+                    steps {
+                           sh 'mvn clean package'
+                    }
+        }
+        stage('Check before deploy') {
                     steps {
                         input 'Can i deploy to prod ?'
                     }
               }
-        stage('deploy') {
+        stage('create docker image') {
                     steps {
-                        echo 'Deploy to prod !'
+                        sh 'mvn docker:build'
                     }
               }
     }
