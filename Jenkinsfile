@@ -2,7 +2,7 @@ pipeline {
     agent { docker { image 'maven:3.3.3' } }
     environment {
         SUCCESS_MSG = 'This will run only if successful env'
-        //DOCKER_HOST = 'tcp://34.219.140.176:4243'
+        DOCKER_HOST = 'tcp://34.219.140.176:4243'
     }
     stages {
         stage('build') {
