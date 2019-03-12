@@ -1,6 +1,7 @@
 pipeline {
     agent { docker { 
-        image 'maven:3.3.3' 
+        image 'maven:3.3.3'
+        label 'dockerserver'
     } }
     environment {
         SUCCESS_MSG = 'This will run only if successful env'
