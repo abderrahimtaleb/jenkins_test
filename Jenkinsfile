@@ -1,13 +1,16 @@
 pipeline {
-    agent { docker { image 'maven:3.3.3' } }
+    agent { docker { 
+        label 'docker'
+        image 'maven:3.3.3' 
+    } }
     environment {
         SUCCESS_MSG = 'This will run only if successful env'
         //DOCKER_HOST = 'tcp://34.219.140.176:4243'
     }
-    stage('Initialize'){
+    /*stage('Initialize'){
         def dockerHome = tool 'myDocker'
         env.PATH = "${dockerHome}/bin:${env.PATH}"
-    }
+    }*/
     stages {
         stage('build') {
             steps {
