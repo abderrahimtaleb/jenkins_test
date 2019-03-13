@@ -34,10 +34,7 @@ node {
         stage('run image') {
                         //sh 'docker -H tcp://34.219.140.176:4243 run -d -p 80:8080 jenkins-test'
                         docker.withServer('tcp://54.185.3.48:4243', 'swarm-certs') {
-                              docker.image('jenkins-test').withRun('-p 80:8080') { c ->
-                            sh 'echo "ok"'
-                        }
-                    
+                              docker.image('jenkins-test').run('-p 80:8080') 
               }
             
         }
