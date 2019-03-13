@@ -1,4 +1,3 @@
-node() {
 pipeline {
     agent { docker { 
         image 'maven:3.3.3'
@@ -73,5 +72,4 @@ pipeline {
                  echo 'For example, if the Pipeline was previously failing but is now successful'
                  }
           }
-}
 }
