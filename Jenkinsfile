@@ -1,11 +1,13 @@
 node {
-    agent { docker { 
-        image 'maven:3.3.3'
-    } }
     environment {
         SUCCESS_MSG = 'This will run only if successful env'
         //DOCKER_HOST = 'tcp://34.219.140.176:4243'
     }
+        stage('init mvn'){
+            steps{
+                docker.image('maven:3.3.3').pull()
+            }
+        }
         stage('build') {
             steps {
                 timeout(time : 1, unit : 'MINUTES'){
