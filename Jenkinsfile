@@ -1,4 +1,4 @@
-pipeline {
+node {
     agent { docker { 
         image 'maven:3.3.3'
     } }
@@ -6,7 +6,6 @@ pipeline {
         SUCCESS_MSG = 'This will run only if successful env'
         //DOCKER_HOST = 'tcp://34.219.140.176:4243'
     }
-    stages {
         stage('build') {
             steps {
                 timeout(time : 1, unit : 'MINUTES'){
@@ -50,7 +49,7 @@ pipeline {
               }
             
         }
-    }
+    
 
     post{
          always {
