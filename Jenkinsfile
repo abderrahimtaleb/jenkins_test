@@ -41,7 +41,7 @@ pipeline {
               }
         stage('run image') {
                     steps {
-                            node() {
+                            node {
                             docker.image('jenkins-test').run('-p 80:8080')
                             }
                     }
