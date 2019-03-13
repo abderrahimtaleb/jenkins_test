@@ -36,9 +36,7 @@ node {
                               docker.image('jenkins-test').run('-p 80:8080') 
                          }  
         }
-}
-    
-    post{
+        stage('post'){
          always {
                    junit "target/surefire-reports/*.xml"
                  }
@@ -58,3 +56,7 @@ node {
                  echo 'For example, if the Pipeline was previously failing but is now successful'
                  }
           }
+
+}
+    
+    
