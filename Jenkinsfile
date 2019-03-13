@@ -39,9 +39,10 @@ pipeline {
               }
         stage('run image') {
                     steps {
+                        script{
                                 docker.withServer("$DOCKER_HOST") {
                                     docker.image('jenkins-test').run('-p 80:8080')
-                                
+                               }
                             }
                     }
               }
