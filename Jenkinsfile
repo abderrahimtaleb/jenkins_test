@@ -32,7 +32,7 @@ node {
                     
               }
         stage('run image') {
-                        docker.withServer(DOCKER_HOST, 'prod-server') {
+                docker.withServer(${DOCKER_HOST}) {
                               docker.image('jenkins-test').run('-p 80:8080') 
                          }  
         }
