@@ -1,3 +1,4 @@
+node() {
 pipeline {
     agent { docker { 
         image 'maven:3.3.3'
@@ -6,7 +7,6 @@ pipeline {
         SUCCESS_MSG = 'This will run only if successful env'
         //DOCKER_HOST = 'tcp://34.219.140.176:4243'
     }
-    node() {
     stages {
         stage('build') {
             steps {
@@ -52,7 +52,7 @@ pipeline {
             
         }
     }
-}
+
     post{
          always {
                    junit "target/surefire-reports/*.xml"
@@ -73,4 +73,5 @@ pipeline {
                  echo 'For example, if the Pipeline was previously failing but is now successful'
                  }
           }
+}
 }
