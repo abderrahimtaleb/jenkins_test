@@ -39,18 +39,18 @@ pipeline {
                         sh 'mvn docker:build'
                     }
               }
+        node() {
         stage('run image') {
                     steps {
                         //sh 'docker -H tcp://34.219.140.176:4243 run -d -p 80:8080 jenkins-test'
-                        node{
                         docker.withServer('tcp://54.185.3.48:4243', 'swarm-certs') {
                               docker.image('jenkins-test').withRun('-p 80:8080') { c ->
                             sh 'echo "ok"'
                         }
-                        }
                     }
               }
-    }
+            }
+        }
     }
     post{
          always {
