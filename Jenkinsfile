@@ -1,8 +1,8 @@
 node {
-    environment {
-        SUCCESS_MSG = 'This will run only if successful env'
-        //DOCKER_HOST = 'tcp://34.219.140.176:4243'
-    }
+        environment {
+            SUCCESS_MSG = 'This will run only if successful env'
+            DOCKER_HOST = 'tcp://54.185.3.48:4243'
+        }
         stage('init mvn'){
                 docker.image('maven:3.3.3').pull()
         }
@@ -32,14 +32,11 @@ node {
                     
               }
         stage('run image') {
-                        //sh 'docker -H tcp://34.219.140.176:4243 run -d -p 80:8080 jenkins-test'
-                        docker.withServer('tcp://54.185.3.48:4243', 'swarm-certs') {
+                        docker.withServer(DOCKER_HOST) {
                               docker.image('jenkins-test').run('-p 80:8080') 
-              }
-            
+                         }  
         }
     
-
     post{
          always {
                    junit "target/surefire-reports/*.xml"
