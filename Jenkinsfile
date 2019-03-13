@@ -1,7 +1,6 @@
 node {
         environment {
             SUCCESS_MSG = 'This will run only if successful env'
-            DOCKER_HOST = 'tcp://54.185.3.48:4243'
         }
         stage('init mvn'){
                 docker.image('maven:3.3.3').pull()
@@ -32,6 +31,7 @@ node {
                     
               }
         stage('run image') {
+                def DOCKER_HOST = 'tcp://54.185.3.48:4243'
                 docker.withServer("${DOCKER_HOST}") {
                               docker.image('jenkins-test').run('-p 80:8080') 
                          }  
