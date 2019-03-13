@@ -42,7 +42,7 @@ node {
                    junit "target/surefire-reports/*.xml"
                  }
          success{
-                 echo SUCCESS_MSG
+                 echo 'C fait !'
                  }
          failure{
                 mail to: 'sc.abderrahim.taleb@gmail.com',
