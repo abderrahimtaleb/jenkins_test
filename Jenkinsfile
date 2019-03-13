@@ -41,7 +41,10 @@ pipeline {
               }
         stage('run image') {
                     steps {
-                        sh 'docker -H tcp://34.219.140.176:4243 run -d -p 80:8080 jenkins-test'
+                        //sh 'docker -H tcp://34.219.140.176:4243 run -d -p 80:8080 jenkins-test'
+                        docker.image('jenkins-test').withRun('-p 80:8080') { c ->
+                            sh 'echo "ok"'
+                        }
                     }
               }
     }
