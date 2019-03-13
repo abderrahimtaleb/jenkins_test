@@ -6,6 +6,7 @@ pipeline {
         SUCCESS_MSG = 'This will run only if successful env'
         //DOCKER_HOST = 'tcp://34.219.140.176:4243'
     }
+    node() {
     stages {
         stage('build') {
             steps {
@@ -39,7 +40,6 @@ pipeline {
                         sh 'mvn docker:build'
                     }
               }
-        node() {
         stage('run image') {
                     steps {
                         //sh 'docker -H tcp://34.219.140.176:4243 run -d -p 80:8080 jenkins-test'
@@ -49,9 +49,10 @@ pipeline {
                         }
                     }
               }
-            }
+            
         }
     }
+}
     post{
          always {
                    junit "target/surefire-reports/*.xml"
