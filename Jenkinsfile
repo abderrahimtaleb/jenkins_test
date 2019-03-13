@@ -1,7 +1,4 @@
 node {
-        environment {
-            SUCCESS_MSG = 'This will run only if successful env'
-        }
         stage('init mvn'){
                 docker.image('maven:3.3.3').pull()
         }
@@ -36,27 +33,7 @@ node {
                               docker.image('jenkins-test').run('-p 80:8080') 
                          }  
         }
-        stage('post'){
-         always {
-                   junit "target/surefire-reports/*.xml"
-                 }
-         success{
-                 echo 'C fait !'
-                 }
-         failure{
-                mail to: 'sc.abderrahim.taleb@gmail.com',
-                     subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
-                     body: "Something is wrong with ${env.BUILD_URL}"
-                }
-         unstable{
-                 echo 'This will run only if the run was marked as unstable'
-                 }
-         changed{
-                 echo 'This will run only if the state of the Pipeline has changed'
-                 echo 'For example, if the Pipeline was previously failing but is now successful'
-                 }
-          }
-
+        
 }
     
     
