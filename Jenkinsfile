@@ -27,11 +27,11 @@ pipeline {
                            sh 'mvn clean package'
                     }
         }
-        /*stage('Check before deploy') {
+        stage('Check before deploy') {
                     steps {
                         input 'Can i deploy to prod ?'
                     }
-              }*/
+              }
         stage('create docker image') {
                     steps {
                         sh 'mvn docker:build'
@@ -39,10 +39,9 @@ pipeline {
               }
         stage('run image') {
                     steps {
-                            script {
                                 docker.withServer("$DOCKER_HOST") {
                                     docker.image('jenkins-test').run('-p 80:8080')
-                                }
+                                
                             }
                     }
               }
