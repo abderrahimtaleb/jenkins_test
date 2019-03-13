@@ -4,9 +4,7 @@ node {
         //DOCKER_HOST = 'tcp://34.219.140.176:4243'
     }
         stage('init mvn'){
-            steps{
                 docker.image('maven:3.3.3').pull()
-            }
         }
         stage('build') {
             steps {
