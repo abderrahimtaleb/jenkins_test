@@ -19,10 +19,10 @@ node {
                            sh 'mvn clean package'
                     
         }
-        stage('Check before deploy') {
+        /*stage('Check before deploy') {
                         input 'Can i deploy to prod ?'
                     
-              }
+              }*/
         stage('create docker image') {
                         sh 'mvn docker:build'
                     
