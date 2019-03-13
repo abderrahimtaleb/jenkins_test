@@ -11,8 +11,8 @@ pipeline {
             steps {
                 timeout(time : 1, unit : 'MINUTES'){
                     retry(5){
-                          sh 'mvn --version'
                           sh 'mvn install clean -DskipTests'
+                          sh 'mvn compile'
                       }
                     }
 
@@ -29,11 +29,11 @@ pipeline {
                            sh 'mvn clean package'
                     }
         }
-        stage('Check before deploy') {
+        /*stage('Check before deploy') {
                     steps {
                         input 'Can i deploy to prod ?'
                     }
-              }
+              }*/
         stage('create docker image') {
                     steps {
                         sh 'mvn docker:build'
@@ -42,13 +42,15 @@ pipeline {
         stage('run image') {
                     steps {
                             script {
-                                docker.image('jenkins-test').run('-p 80:8080')
+                                docker.withServer('tcp://54.185.3.48:4243') {
+                                    docker.image('jenkins-test').run('-p 80:8080')
+                                }
                             }
                     }
               }
        
     }
-            post{
+    post{
                  always {
                            junit "target/surefire-reports/*.xml"
                          }
@@ -67,5 +69,5 @@ pipeline {
                          echo 'This will run only if the state of the Pipeline has changed'
                          echo 'For example, if the Pipeline was previously failing but is now successful'
                          }
-                  }
+         }
 }
