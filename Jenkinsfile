@@ -1,11 +1,8 @@
 pipeline {
     agent any
-    /*{ docker { 
-        image 'maven:3.3.3'
-    } }*/
     environment {
         SUCCESS_MSG = 'This will run only if successful env'
-        //DOCKER_HOST = 'tcp://34.219.140.176:4243'
+        DOCKER_HOST = 'tcp://54.185.3.48:4243'
     }
     stages {
         stage('build') {
@@ -43,7 +40,7 @@ pipeline {
         stage('run image') {
                     steps {
                             script {
-                                docker.withServer('tcp://54.185.3.48:4243') {
+                                docker.withServer("$DOCKER_HOST") {
                                     docker.image('jenkins-test').run('-p 80:8080')
                                 }
                             }
