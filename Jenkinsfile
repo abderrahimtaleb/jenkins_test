@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         SUCCESS_MSG = 'This will run only if successful env'
-        DOCKER_HOST = 'tcp://54.185.3.48:4243'
+        DOCKER_HOST = 'tcp://54.185.193.176:4243'
     }
     stages {
         stage('build') {
